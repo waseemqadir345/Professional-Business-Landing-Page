@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Landing Page — Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 800px;
+    background: #0a0a0f;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    display: flex;
+  }
+
+  /* LEFT — info panel */
+  .left {
+    width: 420px;
+    background: #111118;
+    border-right: 1px solid #1e1e2e;
+    padding: 44px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: #1a1a2e; border: 1px solid #2d2d50;
+    border-radius: 20px; padding: 5px 13px;
+    font-size: 12px; color: #a78bfa; font-weight: 500;
+    margin-bottom: 26px; width: fit-content;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #a78bfa; }
+  h1 { font-size: 34px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.5px; }
+  h1 span { color: #a78bfa; }
+  .subtitle { font-size: 14px; color: #6b7280; line-height: 1.65; margin-bottom: 32px; }
+  .features { display: flex; flex-direction: column; gap: 13px; margin-bottom: 36px; }
+  .feat { display: flex; align-items: center; gap: 11px; font-size: 13px; color: #c4c4d4; }
+  .feat-icon {
+    width: 30px; height: 30px; background: #1a1a2e;
+    border: 1px solid #2d2d50; border-radius: 7px;
+    display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+  }
+  .tech-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tech { background: #1a1a2e; border: 1px solid #2d2d50; border-radius: 6px; padding: 4px 11px; font-size: 12px; color: #6b7280; font-weight: 500; }
+  .tech.hi { border-color: #4c3a8a; color: #a78bfa; background: #1a1030; }
+
+  /* RIGHT — mock landing page preview */
+  .right {
+    flex: 1; background: #f8f8fc;
+    display: flex; flex-direction: column;
+    overflow: hidden; position: relative;
+  }
+
+  /* Mock browser bar */
+  .browser-bar {
+    background: #e8e8f0; padding: 8px 14px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid #d0d0e0;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .url-bar {
+    flex: 1; background: #fff; border-radius: 4px;
+    padding: 4px 10px; font-size: 11px; color: #888;
+    border: 1px solid #ddd; margin-left: 8px;
+  }
+
+  /* Mock landing page */
+  .mock-page { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a0a3e 0%, #2d1060 50%, #1a0a3e 100%);
+    padding: 28px 32px 24px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -30px; right: -30px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(167,139,250,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .nav-logo { color: #fff; font-size: 14px; font-weight: 700; }
+  .nav-links { display: flex; gap: 16px; }
+  .nav-link { color: rgba(255,255,255,0.6); font-size: 10px; }
+  .nav-cta {
+    background: #a78bfa; color: #fff;
+    border-radius: 4px; padding: 4px 12px; font-size: 10px; font-weight: 600;
+  }
+  .hero-tag {
+    display: inline-block; background: rgba(167,139,250,0.15);
+    border: 1px solid rgba(167,139,250,0.3); border-radius: 12px;
+    padding: 3px 10px; font-size: 9px; color: #a78bfa; margin-bottom: 10px;
+  }
+  .hero-h { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 8px; }
+  .hero-h span { color: #a78bfa; }
+  .hero-sub { font-size: 10px; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 16px; max-width: 300px; }
+  .hero-btns { display: flex; gap: 8px; }
+  .btn-p { background: #a78bfa; color: #fff; border-radius: 4px; padding: 6px 16px; font-size: 10px; font-weight: 600; }
+  .btn-s { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 6px 16px; font-size: 10px; }
+
+  /* Stats bar */
+  .stats-bar {
+    background: #fff; border-bottom: 1px solid #e8e8f0;
+    padding: 10px 32px; display: flex; gap: 32px; align-items: center;
+  }
+  .stat { text-align: center; }
+  .stat-val { font-size: 14px; font-weight: 700; color: #1a0a3e; }
+  .stat-label { font-size: 8px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Features section */
+  .features-sec { background: #fff; padding: 16px 32px; flex: 1; }
+  .sec-label { font-size: 9px; color: #a78bfa; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .sec-title { font-size: 14px; font-weight: 700; color: #1a0a3e; margin-bottom: 14px; }
+  .cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .card {
+    background: #f8f6ff; border: 1px solid #ede8ff;
+    border-radius: 8px; padding: 12px;
+  }
+  .card-icon { font-size: 16px; margin-bottom: 6px; }
+  .card-title { font-size: 10px; font-weight: 600; color: #1a0a3e; margin-bottom: 3px; }
+  .card-desc { font-size: 8px; color: #6b7280; line-height: 1.5; }
+
+  /* CTA footer */
+  .cta-bar {
+    background: linear-gradient(90deg, #1a0a3e, #2d1060);
+    padding: 12px 32px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .cta-text { color: #fff; font-size: 11px; font-weight: 600; }
+  .cta-sub { color: rgba(255,255,255,0.5); font-size: 8px; margin-top: 2px; }
+  .cta-btn { background: #a78bfa; color: #fff; border-radius: 4px; padding: 7px 18px; font-size: 10px; font-weight: 700; }
+
+  /* Floating label */
+  .preview-label {
+    position: absolute; top: 48px; right: 12px;
+    background: #a78bfa; color: #fff; font-size: 9px; font-weight: 600;
+    padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="left">
+  <div>
+    <div class="badge"><div class="badge-dot"></div> Web Development Project</div>
+    <h1>Professional<br><span>Business</span><br>Landing Page</h1>
+    <p class="subtitle">A high-converting, fully responsive landing page built with pure HTML, CSS & JavaScript. Fast, beautiful, and ready to launch in days.</p>
+    <div class="features">
+      <div class="feat"><div class="feat-icon">📱</div> Fully responsive — perfect on mobile & desktop</div>
+      <div class="feat"><div class="feat-icon">⚡</div> Lightning fast — no heavy frameworks</div>
+      <div class="feat"><div class="feat-icon">🎨</div> Custom design matching your brand colors</div>
+      <div class="feat"><div class="feat-icon">📩</div> Contact form with email integration</div>
+      <div class="feat"><div class="feat-icon">🔍</div> SEO-ready structure and meta tags</div>
+    </div>
+  </div>
+  <div>
+    <div style="font-size: 11px; color: #333355; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Built with</div>
+    <div class="tech-row">
+      <span class="tech hi">HTML5</span>
+      <span class="tech hi">CSS3</span>
+      <span class="tech hi">JavaScript</span>
+      <span class="tech">Responsive</span>
+      <span class="tech">SEO Ready</span>
+    </div>
+  </div>
+</div>
+
+<div class="right">
+  <div class="browser-bar">
+    <div class="dot" style="background:#ff5f57"></div>
+    <div class="dot" style="background:#febc2e"></div>
+    <div class="dot" style="background:#28c840"></div>
+    <div class="url-bar">🔒 www.yourclientbusiness.com</div>
+  </div>
+  <div class="mock-page">
+    <div class="hero">
+      <div class="nav">
+        <div class="nav-logo">⚡ TechFlow</div>
+        <div class="nav-links">
+          <span class="nav-link">Features</span>
+          <span class="nav-link">Pricing</span>
+          <span class="nav-link">About</span>
+          <span class="nav-cta">Get Started</span>
+        </div>
+      </div>
+      <div class="hero-tag">✨ Now with AI-powered features</div>
+      <div class="hero-h">Grow Your Business<br><span>10x Faster</span> with Smart Tools</div>
+      <div class="hero-sub">Everything your business needs to scale — beautifully designed, lightning fast, and built to convert visitors into customers.</div>
+      <div class="hero-btns">
+        <div class="btn-p">Start Free Trial</div>
+        <div class="btn-s">Watch Demo →</div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-val">10K+</div><div class="stat-label">Happy Clients</div></div>
+      <div class="stat"><div class="stat-val">98%</div><div class="stat-label">Satisfaction</div></div>
+      <div class="stat"><div class="stat-val">3x</div><div class="stat-label">More Conversions</div></div>
+      <div class="stat"><div class="stat-val">24/7</div><div class="stat-label">Support</div></div>
+    </div>
+
+    <div class="features-sec">
+      <div class="sec-label">Why choose us</div>
+      <div class="sec-title">Everything You Need to Succeed</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🚀</div>
+          <div class="card-title">Blazing Fast</div>
+          <div class="card-desc">Optimized for speed. Loads in under 1 second on any device or connection.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <div class="card-title">Converts Visitors</div>
+          <div class="card-desc">Strategic CTAs and layout designed to turn visitors into paying customers.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <div class="card-title">Secure & Reliable</div>
+          <div class="card-desc">SSL ready, clean code, no vulnerabilities. Your site stays safe 24/7.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-bar">
+      <div>
+        <div class="cta-text">Ready to launch your business online?</div>
+        <div class="cta-sub">Get your professional website in 3–5 days</div>
+      </div>
+      <div class="cta-btn">Hire Me on Upwork →</div>
+    </div>
+  </div>
+  <div class="preview-label">LIVE PREVIEW</div>
+</div>
+
+</body>
+</html>
